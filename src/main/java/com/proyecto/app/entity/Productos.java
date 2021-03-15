@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Productos implements Serializable {
     private static final long serialVersionUID = 3346525196468868810L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // decimos que genere un valor automático
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // decimos que genere un valor automático
     private long codigo;
     @Column (name = "nombre", nullable = false,length = 60)
     private String nombre;
