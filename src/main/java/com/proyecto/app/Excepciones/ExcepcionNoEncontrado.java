@@ -1,4 +1,4 @@
-package com.proyecto.app.entity;
+package com.proyecto.app.Excepciones;
 
 import org.springframework.http.ResponseEntity;
 
