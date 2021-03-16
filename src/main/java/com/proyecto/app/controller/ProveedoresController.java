@@ -1,8 +1,7 @@
 package com.proyecto.app.controller;
 
-import com.proyecto.app.entity.ExcepcionNoEncontrado;
+import com.proyecto.app.Excepciones.ExcepcionNoEncontrado;
 import com.proyecto.app.entity.Proveedores;
-import com.proyecto.app.service.ProductosService;
 import com.proyecto.app.service.ProveedoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,4 +37,28 @@ public class ProveedoresController {
         }
         return ResponseEntity.ok(oProveedores);
     }
+
+@PutMapping("/{/nif}")
+    public ResponseEntity<?> actualizarProveedores (@RequestBody Proveedores opcionesProveedor, @PathVariable(value = "nif") String nifProveedor)throws ExcepcionNoEncontrado{
+        Optional<Proveedores> oProveedor = proveedoresService.findById(nifProveedor);
+
+        if (!oProveedor.isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+        }
+
+        oProveedor.get().setNombre(opcionesProveedor.getNombre());
+        oProveedor.get().setDireccion(opcionesProveedor.getDireccion());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(oProveedor.get()));
 }
+
+@DeleteMapping("/{nif}")
+public ResponseEntity<?> borrarProveedor (@PathVariable(value = "nif") String nifCliente) throws ExcepcionNoEncontrado{
+        if (proveedoresService.findById(nifCliente).isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+        }
+        proveedoresService.deleteById(nifCliente);
+        return ResponseEntity.ok().build();
+}
+}
+

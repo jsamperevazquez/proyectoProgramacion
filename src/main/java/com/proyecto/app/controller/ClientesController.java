@@ -1,7 +1,7 @@
 package com.proyecto.app.controller;
 
 import com.proyecto.app.entity.Clientes;
-import com.proyecto.app.entity.ExcepcionNoEncontrado;
+import com.proyecto.app.Excepciones.ExcepcionNoEncontrado;
 import com.proyecto.app.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,4 +47,36 @@ public class ClientesController {
         }
         return ResponseEntity.ok(oClientes); // devolvemos un código de ok (200) y devolvemos el cliente
     }
+
+    // Actualizar un cliente
+
+    @PutMapping ("/{dni}") // Operación de tipo PUT porque vamos a cambiar datos del objeto
+    public ResponseEntity<?> actualizarCliente(@RequestBody Clientes opcionesCliente, @PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado{
+        Optional<Clientes> oCliente = clienteService.findById(dniCliente); // En los optional no existe null, por eso vamos a tratarlo con nuestra excepcion
+        if (!oCliente.isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+        }
+        // Devolvemos cada parámetro de nuestro Optional (get) y le asignamos (set) el valor  del cliente que le pasemos por parámetro
+        oCliente.get().setNum_cliente(opcionesCliente.getNum_cliente());
+        oCliente.get().setApellido(opcionesCliente.getApellido());
+        oCliente.get().setNombre(opcionesCliente.getNombre());
+        oCliente.get().setDireccion(opcionesCliente.getDireccion());
+        // Devolvemos un código 201 (creado ok) y el usuario con el método save
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(oCliente.get())); // uso el ocliente.get() porque oCliente es un Optional y el método save devuelve un Cliente
+
+
+    }
+
+    // Borrar un cliente
+    @DeleteMapping ("/{dni}") //Operación de tipo delete
+    public ResponseEntity<?> borrarUsuario (@PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado{
+        if (!clienteService.findById(dniCliente).isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+
+        }
+        clienteService.deleteById(dniCliente); // borramos el cliente que corresponda el dni por parámetro de método
+        return ResponseEntity.ok().build(); // Devolvemos una respuesta http ok (200)
+    }
+
+
 }

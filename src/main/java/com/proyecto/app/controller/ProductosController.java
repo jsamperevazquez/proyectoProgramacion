@@ -1,6 +1,6 @@
 package com.proyecto.app.controller;
 
-import com.proyecto.app.entity.ExcepcionNoEncontrado;
+import com.proyecto.app.Excepciones.ExcepcionNoEncontrado;
 import com.proyecto.app.entity.Productos;
 import com.proyecto.app.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,25 @@ public class ProductosController {
         }
         return ResponseEntity.ok(oProductos);
     }
+    @PutMapping("/{codigo}")
+    public ResponseEntity<?> actualizarProducto(@RequestBody Productos opcionesProducto,@PathVariable(value = "codigo") Long codigoProducto)throws ExcepcionNoEncontrado{
+        Optional<Productos> oProductos= productosService.findById(codigoProducto);
+        if (!oProductos.isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+        }
+        oProductos.get().setNombre(opcionesProducto.getNombre());
+        oProductos.get().setPrecio(opcionesProducto.getPrecio());
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(oProductos.get()));
+    }
+
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<?> borrarProducto(@PathVariable(value = "codigo")Long codigoProducto) throws ExcepcionNoEncontrado{
+        if (!productosService.findById(codigoProducto).isPresent()){
+            throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
+        }
+        productosService.deleteById(codigoProducto);
+        return ResponseEntity.ok().build();
+    }
 }
 
