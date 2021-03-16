@@ -12,7 +12,7 @@ import java.util.Optional;
  * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
  **/
 
-public interface CleinteService {
+public interface ClienteService {
 
     public Iterable<Clientes> findAll(); //Método findAll() que viene de jpaRepository que hemos implementado en nuestro Repository, que devuelve un Iterable de objeto Clientes
 

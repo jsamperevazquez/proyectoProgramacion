@@ -20,7 +20,7 @@ import java.util.Optional;
 // Implementación de nuestro servicio
 
 @Service
-public class ClienteServiceImpl implements CleinteService {
+public class ClienteServiceImpl implements ClienteService {
 
     @Autowired //Con esto hacemos la inyección de dependencias de nuestros Repository
     private ClientesRepository clienteRepository; // Podemos usar nuestro ClienteRepository desde esta clase (patrón fachada)
