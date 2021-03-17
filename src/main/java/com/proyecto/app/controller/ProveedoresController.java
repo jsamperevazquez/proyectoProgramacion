@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Creado por @autor: angel
@@ -24,25 +27,25 @@ public class ProveedoresController {
     private ProveedoresService proveedoresService;
 
     @PostMapping
-    public ResponseEntity<?> crearProveedor(@RequestBody Proveedores proveedor){
+    public ResponseEntity<?> crearProveedor(@RequestBody Proveedores proveedor) {
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(proveedor));
     }
 
     @GetMapping("/{nif}")
-    public ResponseEntity<?> leerProveedor (@PathVariable String nif) throws ExcepcionNoEncontrado {
+    public ResponseEntity<?> leerProveedor(@PathVariable String nif) throws ExcepcionNoEncontrado {
         Optional<Proveedores> oProveedores = proveedoresService.findById(nif);
 
-        if (!oProveedores.isPresent()){
+        if (!oProveedores.isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         return ResponseEntity.ok(oProveedores);
     }
 
-@PutMapping("/{/nif}")
-    public ResponseEntity<?> actualizarProveedores (@RequestBody Proveedores opcionesProveedor, @PathVariable(value = "nif") String nifProveedor)throws ExcepcionNoEncontrado{
+    @PutMapping("/{/nif}")
+    public ResponseEntity<?> actualizarProveedores(@RequestBody Proveedores opcionesProveedor, @PathVariable(value = "nif") String nifProveedor) throws ExcepcionNoEncontrado {
         Optional<Proveedores> oProveedor = proveedoresService.findById(nifProveedor);
 
-        if (!oProveedor.isPresent()){
+        if (!oProveedor.isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
 
@@ -50,15 +53,22 @@ public class ProveedoresController {
         oProveedor.get().setDireccion(opcionesProveedor.getDireccion());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(oProveedor.get()));
-}
+    }
 
-@DeleteMapping("/{nif}")
-public ResponseEntity<?> borrarProveedor (@PathVariable(value = "nif") String nifCliente) throws ExcepcionNoEncontrado{
-        if (proveedoresService.findById(nifCliente).isPresent()){
+    @DeleteMapping("/{nif}")
+    public ResponseEntity<?> borrarProveedor(@PathVariable(value = "nif") String nifCliente) throws ExcepcionNoEncontrado {
+        if (proveedoresService.findById(nifCliente).isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         proveedoresService.deleteById(nifCliente);
         return ResponseEntity.ok().build();
-}
+    }
+    @GetMapping
+    public List<Proveedores> leerTodosProveedores (){
+        List<Proveedores> listaProveedores = StreamSupport
+                .stream(proveedoresService.findAll().spliterator(),false)
+                .collect(Collectors.toList());
+        return listaProveedores;
+    }
 }
 

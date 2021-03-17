@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Creado por @autor: angel
@@ -23,23 +26,24 @@ public class ProductosController {
     private ProductosService productosService;
 
     @PostMapping
-    public ResponseEntity<?> crearProducto(@RequestBody Productos producto){
+    public ResponseEntity<?> crearProducto(@RequestBody Productos producto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(producto));
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<?> leerProductos(@PathVariable(value ="codigo") Long codigoProducto) throws ExcepcionNoEncontrado {
-        Optional<Productos> oProductos=productosService.findById(codigoProducto);
+    public ResponseEntity<?> leerProductos(@PathVariable(value = "codigo") Long codigoProducto) throws ExcepcionNoEncontrado {
+        Optional<Productos> oProductos = productosService.findById(codigoProducto);
 
-        if (!oProductos.isPresent()){
+        if (!oProductos.isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         return ResponseEntity.ok(oProductos);
     }
+
     @PutMapping("/{codigo}")
-    public ResponseEntity<?> actualizarProducto(@RequestBody Productos opcionesProducto,@PathVariable(value = "codigo") Long codigoProducto)throws ExcepcionNoEncontrado{
-        Optional<Productos> oProductos= productosService.findById(codigoProducto);
-        if (!oProductos.isPresent()){
+    public ResponseEntity<?> actualizarProducto(@RequestBody Productos opcionesProducto, @PathVariable(value = "codigo") Long codigoProducto) throws ExcepcionNoEncontrado {
+        Optional<Productos> oProductos = productosService.findById(codigoProducto);
+        if (!oProductos.isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         oProductos.get().setNombre(opcionesProducto.getNombre());
@@ -49,12 +53,20 @@ public class ProductosController {
     }
 
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<?> borrarProducto(@PathVariable(value = "codigo")Long codigoProducto) throws ExcepcionNoEncontrado{
-        if (!productosService.findById(codigoProducto).isPresent()){
+    public ResponseEntity<?> borrarProducto(@PathVariable(value = "codigo") Long codigoProducto) throws ExcepcionNoEncontrado {
+        if (!productosService.findById(codigoProducto).isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         productosService.deleteById(codigoProducto);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public List<Productos> leerTodosProductos() {
+        List<Productos> listaProductos = StreamSupport
+                .stream(productosService.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+        return listaProductos;
     }
 }
 

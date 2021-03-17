@@ -8,7 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Creado por @autor: angel
@@ -30,18 +34,19 @@ public class ClientesController {
     //Creamos un nuevo cliente
 
     @PostMapping  // Recurso Post para crear del api REST
-    public ResponseEntity<?> crearCliente (@RequestBody Clientes cliente){ // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
+    public ResponseEntity<?> crearCliente(@RequestBody Clientes cliente) { // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
         // Método recibe en el cuerpo de la petición un cliente
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente)); //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }
 
     //Leer un cliente
 
-    @GetMapping("/{dni}") //Operación Get; mandamos un parámetro variable ({}) para decirle que cliente queremos que nos devuelva
-    public ResponseEntity<?> leerCliente (@PathVariable(value = "dni") String clienteNif) throws ExcepcionNoEncontrado { //con el value decimos que el parámetro del método es =dni (parámetro del GetMapping)
+    @GetMapping("/{dni}")
+    //Operación Get; mandamos un parámetro variable ({}) para decirle que cliente queremos que nos devuelva
+    public ResponseEntity<?> leerCliente(@PathVariable(value = "dni") String clienteNif) throws ExcepcionNoEncontrado { //con el value decimos que el parámetro del método es =dni (parámetro del GetMapping)
         Optional<Clientes> oClientes = clienteService.findById(clienteNif); // llamamos a nuestro método del service y le pasamos un dni del cliente
 
-        if (!oClientes.isPresent()){ //si no está presente el usuario
+        if (!oClientes.isPresent()) { //si no está presente el usuario
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build()); // Si no encuentra al cliente mandamos una excepción con un ResponseEntity de no encontrado(error 404)
 
         }
@@ -50,10 +55,10 @@ public class ClientesController {
 
     // Actualizar un cliente
 
-    @PutMapping ("/{dni}") // Operación de tipo PUT porque vamos a cambiar datos del objeto
-    public ResponseEntity<?> actualizarCliente(@RequestBody Clientes opcionesCliente, @PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado{
+    @PutMapping("/{dni}") // Operación de tipo PUT porque vamos a cambiar datos del objeto
+    public ResponseEntity<?> actualizarCliente(@RequestBody Clientes opcionesCliente, @PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
         Optional<Clientes> oCliente = clienteService.findById(dniCliente); // En los optional no existe null, por eso vamos a tratarlo con nuestra excepcion
-        if (!oCliente.isPresent()){
+        if (!oCliente.isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
         // Devolvemos cada parámetro de nuestro Optional (get) y le asignamos (set) el valor  del cliente que le pasemos por parámetro
@@ -68,9 +73,9 @@ public class ClientesController {
     }
 
     // Borrar un cliente
-    @DeleteMapping ("/{dni}") //Operación de tipo delete
-    public ResponseEntity<?> borrarUsuario (@PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado{
-        if (!clienteService.findById(dniCliente).isPresent()){
+    @DeleteMapping("/{dni}") //Operación de tipo delete
+    public ResponseEntity<?> borrarUsuario(@PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
+        if (!clienteService.findById(dniCliente).isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
 
         }
@@ -78,5 +83,13 @@ public class ClientesController {
         return ResponseEntity.ok().build(); // Devolvemos una respuesta http ok (200)
     }
 
+    // Leer todos los clientes
+    @GetMapping
+    public List<Clientes> leerTodosClientes() {
+        List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
+                .stream(clienteService.findAll().spliterator(), false) // Le pasamos a Stream el iterable y secuencial (paralelización=false); SplitIterator itera sobre el iterable
+                .collect(Collectors.toList()); // Convierte la colección en una lista;
+        return listaClientes;
+    }
 
 }
