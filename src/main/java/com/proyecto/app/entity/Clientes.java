@@ -73,6 +73,7 @@ public class Clientes implements Serializable {
                         "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
                         "\"apellido\""+" : " + "\""+apellido+"\""  +"\n"+
                         "\"dirección\""+" : " + "\""+direccion+"\""  +"\n"+
-                        "\"num_cliente\""+" : " + "\""+num_cliente+"\"" + "}" ;
+                        "\"num_cliente\""+" : " + "\""+num_cliente+"\"" +"\n"+
+                        "}" ;
     }
 }
