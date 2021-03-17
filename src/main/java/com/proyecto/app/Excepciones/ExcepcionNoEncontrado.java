@@ -14,6 +14,6 @@ public class ExcepcionNoEncontrado extends Exception{
         super();
     }
     public ExcepcionNoEncontrado(ResponseEntity mensaje){
-        super("Error"+ mensaje);
+        super("Error, objeto no encontrado     "+ mensaje);
     }
 }
