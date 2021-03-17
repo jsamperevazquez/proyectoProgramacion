@@ -41,7 +41,7 @@ public class ProveedoresController {
         return ResponseEntity.ok(oProveedores);
     }
 
-    @PutMapping("/{/nif}")
+    @PutMapping("/{nif}")
     public ResponseEntity<?> actualizarProveedores(@RequestBody Proveedores opcionesProveedor, @PathVariable(value = "nif") String nifProveedor) throws ExcepcionNoEncontrado {
         Optional<Proveedores> oProveedor = proveedoresService.findById(nifProveedor);
 
@@ -56,11 +56,11 @@ public class ProveedoresController {
     }
 
     @DeleteMapping("/{nif}")
-    public ResponseEntity<?> borrarProveedor(@PathVariable(value = "nif") String nifCliente) throws ExcepcionNoEncontrado {
-        if (proveedoresService.findById(nifCliente).isPresent()) {
+    public ResponseEntity<?> borrarProveedor(@PathVariable(value = "nif") String nifProveedor) throws ExcepcionNoEncontrado {
+        if (!proveedoresService.findById(nifProveedor).isPresent()) {
             throw new ExcepcionNoEncontrado(ResponseEntity.notFound().build());
         }
-        proveedoresService.deleteById(nifCliente);
+        proveedoresService.deleteById(nifProveedor);
         return ResponseEntity.ok().build();
     }
     @GetMapping
