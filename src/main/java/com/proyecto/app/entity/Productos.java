@@ -25,9 +25,6 @@ public class Productos implements Serializable {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
 
     public String getNombre() {
         return nombre;
