@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -28,15 +27,20 @@ public class ClientesController {
 
     //El controlador se va a comunicar con los métodos creados en la interface del service a través de inyección de dependencias
     @Autowired
-    private ClienteService clienteService;
+    private  ClienteService clienteService;
+    static Clientes clienteFichero;
 
 
     //Creamos un nuevo cliente
 
     @PostMapping  // Recurso Post para crear del api REST
     public ResponseEntity<?> crearCliente(@RequestBody Clientes cliente) { // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
+        ResponseEntity entity;
         // Método recibe en el cuerpo de la petición un cliente
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente)); //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
+        entity=ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
+        clienteFichero=clienteService.save(cliente);
+        EscribirJson.escribirClientesJson("C:\\Users\\angel\\OneDrive\\Escritorio\\clientes",clienteFichero);
+        return entity; //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }
 
     //Leer un cliente
@@ -85,8 +89,8 @@ public class ClientesController {
 
     // Leer todos los clientes
     @GetMapping
-    public List<Clientes> leerTodosClientes() {
-        List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
+    public  List<Clientes> leerTodosClientes() {
+                 List<Clientes> listaClientes= StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
                 .stream(clienteService.findAll().spliterator(), false) // Le pasamos a Stream el iterable y secuencial (paralelización=false); SplitIterator itera sobre el iterable
                 .collect(Collectors.toList()); // Convierte la colección en una lista;
         return listaClientes;
