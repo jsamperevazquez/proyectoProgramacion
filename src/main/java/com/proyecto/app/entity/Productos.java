@@ -44,4 +44,14 @@ public class Productos implements Serializable {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-}
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\"codigo\""+" : " + "\""+codigo+"\""+"\n"+
+                "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
+                "\"precio\""+" : " + "\""+precio+"\""  +"\n"+
+                "}" ;
+    }
+    }
+

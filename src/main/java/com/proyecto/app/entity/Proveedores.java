@@ -45,4 +45,13 @@ public class Proveedores implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\"nif\""+" : " + "\""+nif+"\""+"\n"+
+                "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
+                "\"direccion\""+" : " + "\""+direccion+"\""  +"\n"+
+                 "}" ;
+    }
 }

@@ -21,7 +21,7 @@ public class Clientes implements Serializable {
     private String apellido;
     @Column(length = 200, nullable = false)
     private String direccion;
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Decimos que nos genere un valor de identidad
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Decimos que nos genere un valor de identidad
     private long num_cliente;
 
     // Setter y Getters
@@ -63,5 +63,16 @@ public class Clientes implements Serializable {
 
     public void setNum_cliente(long num_cliente) {
         this.num_cliente = num_cliente;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "{\n" +
+                        "\"dni\""+" : " + "\""+dni+"\""+"\n"+
+                        "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
+                        "\"apellido\""+" : " + "\""+apellido+"\""  +"\n"+
+                        "\"dirección\""+" : " + "\""+direccion+"\""  +"\n"+
+                        "\"num_cliente\""+" : " + "\""+num_cliente+"\"" + "}" ;
     }
 }
