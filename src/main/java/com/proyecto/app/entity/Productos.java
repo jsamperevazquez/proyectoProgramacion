@@ -20,7 +20,7 @@ public class Productos implements Serializable {
     /**
      * Código del producto (Primary KEY)
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Id
     @Column(unique = true)
@@ -29,14 +29,14 @@ public class Productos implements Serializable {
     /**
      * Nombre del producto
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(name = "nombre", nullable = false, length = 60)
     private String nombre;
     /**
      * Precio del producto
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(nullable = false)
     private float precio;

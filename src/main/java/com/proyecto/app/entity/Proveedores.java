@@ -23,7 +23,7 @@ public class Proveedores implements Serializable {
     /**
      * Nif del proveedor (Primary KEY)
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Id
     @Column(unique = true)
@@ -31,14 +31,14 @@ public class Proveedores implements Serializable {
     /**
      * Nombre del proveedor
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(length = 60)
     private String nombre;
     /**
      * Dirección del proveedor
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(length = 200)
     private String direccion;

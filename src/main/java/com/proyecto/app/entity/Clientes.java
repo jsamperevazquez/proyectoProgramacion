@@ -26,28 +26,28 @@ public class Clientes implements Serializable {
     /**
      * Nombre del cliente
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(name = "nombre", nullable = false, length = 60) //Damos características a nuestra columna
     private String nombre;
     /**
      * Apellidos del cliente
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(length = 80)
     private String apellido;
     /**
      * dirección del cliente
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(length = 200, nullable = false)
     private String direccion;
     /**
      * Número de cliente
      *
-     * @Column con parámetros de columna de la tabla
+     * Column con parámetros de columna de la tabla
      */
     @Column(unique = true)
     private long num_cliente;
