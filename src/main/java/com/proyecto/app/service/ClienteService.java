@@ -7,10 +7,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Creado por @autor: angel
+ * Creado por @autor: angel,David
  * El  15 de mar. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
- **/
+ * interface con métodos necesarios para API
+ */
 
 public interface ClienteService {
 

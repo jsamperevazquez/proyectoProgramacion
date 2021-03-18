@@ -7,8 +7,8 @@ import javax.swing.*;
 /**
  * Creado por @autor: angel
  * El  16 de mar. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
- **/
+ * Clase para controlar excepciónes
+ */
 public class ExcepcionNoEncontrado extends Exception{
     public ExcepcionNoEncontrado() {
         super();

@@ -6,18 +6,39 @@ import java.io.Serializable;
 /**
  * Creado por @autor: angel
  * El  14 de mar. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
- **/
+ *
+ * @version 0.1.1
+ * Clase que crea entidad productos en BD
+ */
 @Entity
 @Table(name = "productos")
 public class Productos implements Serializable {
+    /**
+     * UID de la serialización generada por entorno para posible alojamiento nube de BD
+     */
     private static final long serialVersionUID = 3346525196468868810L;
+    /**
+     * Código del producto (Primary KEY)
+     *
+     * @Column con parámetros de columna de la tabla
+     */
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // decimos que genere un valor automático
     private long codigo;
-    @Column (name = "nombre", nullable = false,length = 60)
+    /**
+     * Nombre del producto
+     *
+     * @Column con parámetros de columna de la tabla
+     */
+    @Column(name = "nombre", nullable = false, length = 60)
     private String nombre;
-    @Column (nullable = false)
+    /**
+     * Precio del producto
+     *
+     * @Column con parámetros de columna de la tabla
+     */
+    @Column(nullable = false)
     private float precio;
 
 
@@ -42,13 +63,18 @@ public class Productos implements Serializable {
         this.precio = precio;
     }
 
+    /**
+     * toString adaptado a fichero .json
+     *
+     * @return datos del producto
+     */
     @Override
     public String toString() {
         return "{\n" +
-                "\"codigo\""+" : " + "\""+codigo+"\""+"\n"+
-                "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
-                "\"precio\""+" : " + "\""+precio+"\""  +"\n"+
-                "}" ;
+                "\"codigo\"" + " : " + "\"" + codigo + "\"" + "\n" +
+                "\"nombre\"" + " : " + "\"" + nombre + "\"" + "\n" +
+                "\"precio\"" + " : " + "\"" + precio + "\"" + "\n" +
+                "}";
     }
-    }
+}
 

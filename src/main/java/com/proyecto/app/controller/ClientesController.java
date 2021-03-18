@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Creado por @autor: angel
+ * Creado por @autor: angel,David
  * El  16 de mar. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
+ *
+ * @version 0.0.3
+ * Clase controlador de entidad clientes
  **/
 
 
@@ -26,25 +28,46 @@ import java.util.stream.StreamSupport;
 public class ClientesController {
 
     //El controlador se va a comunicar con los métodos creados en la interface del service a través de inyección de dependencias
+    /**
+     * clienteService para inyección de dependencias
+     */
     @Autowired
-    private  ClienteService clienteService;
+    private ClienteService clienteService;
+    /**
+     * Para manejar la escritura de ficheros
+     * Cada inserción en BD será escrita en File .json
+     */
     static Clientes clienteFichero;
 
 
     //Creamos un nuevo cliente
 
+    /**
+     * Método POST para petición CRUD mediante API para crear nuevos clientes
+     *
+     * @param cliente Recibe un cliente
+     * @return Respuesta de HTTPstatus con el estado
+     */
+
     @PostMapping  // Recurso Post para crear del api REST
     public ResponseEntity<?> crearCliente(@RequestBody Clientes cliente) { // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
         ResponseEntity entity;
         // Método recibe en el cuerpo de la petición un cliente
-        entity=ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
-        clienteFichero=clienteService.save(cliente);
-        EscribirJson.escribirClientesJson("C:\\Users\\angel\\OneDrive\\Escritorio\\clientes",clienteFichero);
+        entity = ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
+        clienteFichero = clienteService.save(cliente);
+        EscribirJson.escribirClientesJson("C:\\Users\\angel\\OneDrive\\Escritorio\\clientes", clienteFichero);
         return entity; //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }
 
     //Leer un cliente
 
+    /**
+     * Método GET para petición CRUD mediante API para leer cliente por dni
+     *
+     * @param clienteNif nif del cliente a buscar
+     * @return Respuesta de HTTPstatus con el estado
+     * @throws ExcepcionNoEncontrado Excepción propia si el cliente no se encuentra
+     */
     @GetMapping("/{dni}")
     //Operación Get; mandamos un parámetro variable ({}) para decirle que cliente queremos que nos devuelva
     public ResponseEntity<?> leerCliente(@PathVariable(value = "dni") String clienteNif) throws ExcepcionNoEncontrado { //con el value decimos que el parámetro del método es =dni (parámetro del GetMapping)
@@ -59,6 +82,14 @@ public class ClientesController {
 
     // Actualizar un cliente
 
+    /**
+     * Método PUT para petición CRUD mediante API para actualizar un cliente
+     *
+     * @param opcionesCliente Nuevos datos del cliente
+     * @param dniCliente      dni del cliente a actualizar
+     * @return Respuesta de HTTPstatus con el estado
+     * @throws ExcepcionNoEncontrado Excepción propia si el cliente no se encuentra
+     */
     @PutMapping("/{dni}") // Operación de tipo PUT porque vamos a cambiar datos del objeto
     public ResponseEntity<?> actualizarCliente(@RequestBody Clientes opcionesCliente, @PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
         Optional<Clientes> oCliente = clienteService.findById(dniCliente); // En los optional no existe null, por eso vamos a tratarlo con nuestra excepcion
@@ -77,6 +108,13 @@ public class ClientesController {
     }
 
     // Borrar un cliente
+    /**
+     * Método DELETE para petición CRUD mediante API para eliminar un cliente
+     * @param dniCliente dni del cliente a eliminar
+     * @return Respuesta de HTTPstatus con el estado
+     * @throws ExcepcionNoEncontrado  Excepción propia si el cliente no se encuentra
+     */
+
     @DeleteMapping("/{dni}") //Operación de tipo delete
     public ResponseEntity<?> borrarUsuario(@PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
         if (!clienteService.findById(dniCliente).isPresent()) {
@@ -88,9 +126,15 @@ public class ClientesController {
     }
 
     // Leer todos los clientes
+
+    /**
+     * Método GET para leer todos los clientes en una lista
+     * @return Lista con todas los clientes de la entidad
+     */
+
     @GetMapping
-    public  List<Clientes> leerTodosClientes() {
-                 List<Clientes> listaClientes= StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
+    public List<Clientes> leerTodosClientes() {
+        List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
                 .stream(clienteService.findAll().spliterator(), false) // Le pasamos a Stream el iterable y secuencial (paralelización=false); SplitIterator itera sobre el iterable
                 .collect(Collectors.toList()); // Convierte la colección en una lista;
         return listaClientes;

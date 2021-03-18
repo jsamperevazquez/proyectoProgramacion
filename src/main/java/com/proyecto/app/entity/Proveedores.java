@@ -9,17 +9,38 @@ import java.io.Serializable;
 /**
  * Creado por @autor: angel
  * El  14 de mar. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
- **/
+ *
+ * @version 0.1.1
+ * Clase que crea la entidad proveedores en BS
+ */
 @Entity
-@Table (name = "proveedores")
+@Table(name = "proveedores")
 public class Proveedores implements Serializable {
+    /**
+     * UID de la serialización generada por entorno para posible alojamiento nube de BD
+     */
     private static final long serialVersionUID = 703557856708520535L;
+    /**
+     * Nif del proveedor (Primary KEY)
+     *
+     * @Column con parámetros de columna de la tabla
+     */
     @Id
+    @Column(unique = true)
     private String nif;
-    @Column (length = 60)
+    /**
+     * Nombre del proveedor
+     *
+     * @Column con parámetros de columna de la tabla
+     */
+    @Column(length = 60)
     private String nombre;
-    @Column (length = 200)
+    /**
+     * Dirección del proveedor
+     *
+     * @Column con parámetros de columna de la tabla
+     */
+    @Column(length = 200)
     private String direccion;
 
     public String getNif() {
@@ -46,12 +67,17 @@ public class Proveedores implements Serializable {
         this.direccion = direccion;
     }
 
+    /**
+     * toString adaptado a creación fichero -json
+     *
+     * @return datos del proveedor
+     */
     @Override
     public String toString() {
         return "{\n" +
-                "\"nif\""+" : " + "\""+nif+"\""+"\n"+
-                "\"nombre\""+" : " + "\""+nombre+"\""+"\n"+
-                "\"direccion\""+" : " + "\""+direccion+"\""  +"\n"+
-                 "}" ;
+                "\"nif\"" + " : " + "\"" + nif + "\"" + "\n" +
+                "\"nombre\"" + " : " + "\"" + nombre + "\"" + "\n" +
+                "\"direccion\"" + " : " + "\"" + direccion + "\"" + "\n" +
+                "}";
     }
 }
