@@ -132,7 +132,7 @@ public class ClientesController {
      * @return Lista con todas los clientes de la entidad
      */
 
-    @GetMapping
+    @GetMapping //Creamos el list
     public List<Clientes> leerTodosClientes() {
         List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
                 .stream(clienteService.findAll().spliterator(), false) // Le pasamos a Stream el iterable y secuencial (paralelización=false); SplitIterator itera sobre el iterable

@@ -17,12 +17,14 @@ public class Clientes implements Serializable {
      * UID de la serialización generada por entorno para posible alojamiento nube de BD
      */
     private static final long serialVersionUID = 4931928483294722769L;
+
     /**
      * DNI del cliente (Primary KEY)
      */
     @Id
     @Column(unique = true)
     private String dni;
+
     /**
      * Nombre del cliente
      *
@@ -30,6 +32,7 @@ public class Clientes implements Serializable {
      */
     @Column(name = "nombre", nullable = false, length = 60) //Damos características a nuestra columna
     private String nombre;
+
     /**
      * Apellidos del cliente
      *
