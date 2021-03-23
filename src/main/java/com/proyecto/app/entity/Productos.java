@@ -71,9 +71,9 @@ public class Productos implements Serializable {
     @Override
     public String toString() {
         return "{\n" +
-                "\"codigo\"" + " : " + "\"" + codigo + "\"" + "\n" +
-                "\"nombre\"" + " : " + "\"" + nombre + "\"" + "\n" +
-                "\"precio\"" + " : " + "\"" + precio + "\"" + "\n" +
+                "\"codigo\"" + " : " + "\"" + codigo + "\"" +" , " + "\n"+
+                "\"nombre\"" + " : " + "\"" + nombre + "\""+" , " + "\n" +
+                "\"precio\"" + " : " + "\"" + precio + "\""+ "\n"+
                 "}";
     }
 }

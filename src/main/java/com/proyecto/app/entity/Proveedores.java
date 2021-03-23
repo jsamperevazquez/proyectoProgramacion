@@ -75,8 +75,8 @@ public class Proveedores implements Serializable {
     @Override
     public String toString() {
         return "{\n" +
-                "\"nif\"" + " : " + "\"" + nif + "\"" + "\n" +
-                "\"nombre\"" + " : " + "\"" + nombre + "\"" + "\n" +
+                "\"nif\"" + " : " + "\"" + nif + "\"" +" , "+ "\n" +
+                "\"nombre\"" + " : " + "\"" + nombre + "\""+" , " + "\n" +
                 "\"direccion\"" + " : " + "\"" + direccion + "\"" + "\n" +
                 "}";
     }

@@ -43,7 +43,7 @@ public class ProveedoresController {
     @PostMapping
     public ResponseEntity<?> crearProveedor(@RequestBody Proveedores proveedor) {
         proveedorFichero=proveedoresService.save(proveedor);
-        EscribirJson.escribirProveedoresJson("C:\\Users\\dmama\\Desktop\\proovedores",proveedorFichero);
+        EscribirJson.escribirProveedoresJson("C:\\Users\\angel\\OneDrive\\Escritorio\\proovedores",proveedorFichero);
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(proveedor));
     }
     /**

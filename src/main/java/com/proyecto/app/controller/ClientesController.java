@@ -55,7 +55,7 @@ public class ClientesController {
         // Método recibe en el cuerpo de la petición un cliente
         entity = ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
         clienteFichero = clienteService.save(cliente);
-        EscribirJson.escribirClientesJson("C:\\Users\\dmama\\Desktop\\clientes", clienteFichero);
+        EscribirJson.escribirClientesJson("C:\\Users\\angel\\OneDrive\\Escritorio\\clientes", clienteFichero);
         return entity; //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }
 
@@ -132,7 +132,7 @@ public class ClientesController {
      * @return Lista con todas los clientes de la entidad
      */
 
-    @GetMapping //Creamos el list
+    @GetMapping
     public List<Clientes> leerTodosClientes() {
         List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
                 .stream(clienteService.findAll().spliterator(), false) // Le pasamos a Stream el iterable y secuencial (paralelización=false); SplitIterator itera sobre el iterable
