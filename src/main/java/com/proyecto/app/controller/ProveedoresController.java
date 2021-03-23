@@ -44,6 +44,7 @@ public class ProveedoresController {
     public ResponseEntity<?> crearProveedor(@RequestBody Proveedores proveedor) {
         proveedorFichero=proveedoresService.save(proveedor);
         EscribirJson.escribirProveedoresJson("C:\\Users\\angel\\Documents\\Programacion\\proyecto\\src\\main\\java\\com\\proyecto\\app\\ficheros\\proovedores",proveedorFichero);
+        LeerJson.leerJsonProveedores();
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(proveedor));
     }
     /**
