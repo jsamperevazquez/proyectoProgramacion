@@ -25,6 +25,7 @@ import java.util.stream.StreamSupport;
 @RestController
 // Combinación entre Controller y ResponseBody (Controller para controlador; ResponseBody indicamos que el valor de retorno de nuestros métodos tiene que ser cuerpo solicitud (JSON))
 @RequestMapping("/api/clientes") //para acceder a nuestros recursos de usuario a través de la url con navegador
+
 public class ClientesController {
 
     //El controlador se va a comunicar con los métodos creados en la interface del service a través de inyección de dependencias
@@ -48,7 +49,7 @@ public class ClientesController {
      * @param cliente Recibe un cliente
      * @return Respuesta de HTTPstatus con el estado
      */
-
+    @CrossOrigin(origins = "http://localhost:4200") // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
     @PostMapping  // Recurso Post para crear del api REST
     public ResponseEntity<?> crearCliente(@RequestBody Clientes cliente) { // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
         ResponseEntity entity;
@@ -69,6 +70,7 @@ public class ClientesController {
      * @return Respuesta de HTTPstatus con el estado
      * @throws ExcepcionNoEncontrado Excepción propia si el cliente no se encuentra
      */
+    @CrossOrigin(origins = "http://localhost:4200") // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
     @GetMapping("/{dni}")
     //Operación Get; mandamos un parámetro variable ({}) para decirle que cliente queremos que nos devuelva
     public ResponseEntity<?> leerCliente(@PathVariable(value = "dni") String clienteNif) throws ExcepcionNoEncontrado { //con el value decimos que el parámetro del método es =dni (parámetro del GetMapping)
@@ -91,7 +93,9 @@ public class ClientesController {
      * @return Respuesta de HTTPstatus con el estado
      * @throws ExcepcionNoEncontrado Excepción propia si el cliente no se encuentra
      */
+
     @PutMapping("/{dni}") // Operación de tipo PUT porque vamos a cambiar datos del objeto
+    @CrossOrigin(origins = "http://localhost:4200") // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
     public ResponseEntity<?> actualizarCliente(@RequestBody Clientes opcionesCliente, @PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
         Optional<Clientes> oCliente = clienteService.findById(dniCliente); // En los optional no existe null, por eso vamos a tratarlo con nuestra excepcion
         if (!oCliente.isPresent()) {
@@ -116,6 +120,7 @@ public class ClientesController {
      * @throws ExcepcionNoEncontrado  Excepción propia si el cliente no se encuentra
      */
 
+    @CrossOrigin(origins = "http://localhost:4200") // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
     @DeleteMapping("/{dni}") //Operación de tipo delete
     public ResponseEntity<?> borrarUsuario(@PathVariable(value = "dni") String dniCliente) throws ExcepcionNoEncontrado {
         if (!clienteService.findById(dniCliente).isPresent()) {
@@ -133,6 +138,7 @@ public class ClientesController {
      * @return Lista con todas los clientes de la entidad
      */
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public List<Clientes> leerTodosClientes() {
         List<Clientes> listaClientes = StreamSupport // StreamSupport de Object para usar métodos y convertir un Iterable en una lista
