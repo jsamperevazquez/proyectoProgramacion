@@ -11,7 +11,7 @@ import java.util.Scanner;
  **/
 public class LeerJson {
     public static void leerJsonClientes() {
-        File j = new File("C:\\Users\\angel\\Documents\\Programacion\\proyecto\\src\\main\\java\\com\\proyecto\\app\\ficheros\\clientes.json");
+        File j = new File("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\ficheros\\clientes.json");
         Scanner sc = null;
         String datosJson;
         try {
