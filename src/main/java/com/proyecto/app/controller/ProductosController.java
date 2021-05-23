@@ -22,6 +22,7 @@ import java.util.stream.StreamSupport;
  */
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/productos")
 public class ProductosController {
     /**
