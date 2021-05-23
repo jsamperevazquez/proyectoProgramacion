@@ -94,6 +94,15 @@ public class Portal implements ActionListener {
             } catch (URISyntaxException uriSyntaxException) {
                 uriSyntaxException.printStackTrace();
             }
+        }else if (e.getActionCommand()=="Productos"){
+            try {
+                Desktop.getDesktop()
+                        .browse(new URI("http://localhost:4200/productos"));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         }
     }
 
