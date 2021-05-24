@@ -22,6 +22,7 @@ public class Portal implements ActionListener {
     public void iniciar() {
 
         // Instancia de  componentes
+
         marco = new JFrame("Proyecto Programacion");
         panel = new JPanel();
         bClientes = new JButton("Clientes");
@@ -33,6 +34,7 @@ public class Portal implements ActionListener {
         etiFondo = new JLabel();
 
         // Características de los componentes
+
         marco.setTitle("Proyecto Programacion");
         marco.setSize(1200, 1000);
         panel.setSize(1150, 950);
@@ -66,6 +68,7 @@ public class Portal implements ActionListener {
         marco.revalidate();
 
         //Añadir los componentes
+
         panel.add(etiClientes);
         panel.add(etiProductos);
         panel.add(etiProveedores);
@@ -76,6 +79,7 @@ public class Portal implements ActionListener {
         marco.add(panel);
 
         // Gestión de eventos
+
         bClientes.addActionListener(this);
         bProductos.addActionListener(this);
         bProductos.addActionListener(this);
@@ -94,7 +98,7 @@ public class Portal implements ActionListener {
             } catch (URISyntaxException uriSyntaxException) {
                 uriSyntaxException.printStackTrace();
             }
-        }else if (e.getActionCommand()=="Productos"){
+        } else if (e.getActionCommand() == "Productos") {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/productos"));
