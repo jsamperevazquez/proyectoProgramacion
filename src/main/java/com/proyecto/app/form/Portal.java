@@ -83,6 +83,7 @@ public class Portal implements ActionListener {
         bClientes.addActionListener(this);
         bProductos.addActionListener(this);
         bProductos.addActionListener(this);
+        bProveedores.addActionListener(this);
 
     }
 
@@ -102,6 +103,16 @@ public class Portal implements ActionListener {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/productos"));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
+        }
+        else if (e.getActionCommand() == "Proveedores") {
+            try {
+                Desktop.getDesktop()
+                        .browse(new URI("http://localhost:4200/proveedores"));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             } catch (URISyntaxException uriSyntaxException) {
