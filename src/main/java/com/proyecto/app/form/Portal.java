@@ -11,9 +11,10 @@ import java.net.URISyntaxException;
 /**
  * Creado por @autor: angel
  * El  20 de may. de 2021.
- * //-encoding utf8 -docencoding utf8 -charset utf8(Para el javadoc)
- **/
-public class Portal  implements ActionListener {
+ * @version 1.1.0
+ * Clase con interfaz de usuario para el control de API
+ */
+public class Portal implements ActionListener {
     JFrame marco;
     JPanel panel;
     JButton bClientes, bProductos, bProveedores;
@@ -21,6 +22,7 @@ public class Portal  implements ActionListener {
     ImageIcon iconobtnClientes;
     ImageIcon iconobtnProductos;
     ImageIcon iconoProveedores;
+
     public void iniciar() {
 
         // Instancia de  componentes
@@ -37,6 +39,8 @@ public class Portal  implements ActionListener {
         iconobtnClientes = new ImageIcon("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\imagenes\\050.png");
         iconobtnProductos = new ImageIcon("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\imagenes\\134.png");
         iconoProveedores = new ImageIcon("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\imagenes\\198.png");
+
+
         // Características de los componentes
 
         marco.setTitle("Proyecto Programacion");
@@ -89,6 +93,7 @@ public class Portal  implements ActionListener {
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         marco.setLocationRelativeTo(null);
 
+
         //Añadir los componentes
 
         panel.add(etiClientes);
@@ -99,6 +104,7 @@ public class Portal  implements ActionListener {
         panel.add(bProveedores);
         panel.add(etiFondo);
         marco.add(panel);
+
 
         // Gestión de eventos
 
@@ -130,8 +136,7 @@ public class Portal  implements ActionListener {
             } catch (URISyntaxException uriSyntaxException) {
                 uriSyntaxException.printStackTrace();
             }
-        }
-        else if (e.getActionCommand() == "Proveedores") {
+        } else if (e.getActionCommand() == "Proveedores") {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/proveedores"));
