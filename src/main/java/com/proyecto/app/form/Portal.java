@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 /**
  * Creado por @autor: angel
  * El  20 de may. de 2021.
+ *
  * @version 1.1.0
  * Clase con interfaz de usuario para el control de API
  */
@@ -118,7 +119,7 @@ public class Portal implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() == "Clientes") {
+        if (e.getSource() == bClientes) {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/clientes"));
@@ -127,7 +128,7 @@ public class Portal implements ActionListener {
             } catch (URISyntaxException uriSyntaxException) {
                 uriSyntaxException.printStackTrace();
             }
-        } else if (e.getActionCommand() == "Productos") {
+        } else if (e.getSource() == bProductos) {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/productos"));
@@ -136,7 +137,7 @@ public class Portal implements ActionListener {
             } catch (URISyntaxException uriSyntaxException) {
                 uriSyntaxException.printStackTrace();
             }
-        } else if (e.getActionCommand() == "Proveedores") {
+        } else if (e.getSource() == bProveedores) {
             try {
                 Desktop.getDesktop()
                         .browse(new URI("http://localhost:4200/proveedores"));
