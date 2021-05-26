@@ -29,7 +29,7 @@ public class LeerJson {
     }
 
     public static void leerJsonProductos() {
-        File j = new File("C:\\Users\\angel\\Documents\\Programacion\\proyecto\\src\\main\\java\\com\\proyecto\\app\\ficheros\\productos.json");
+        File j = new File("../ficheros/productos.json");
         Scanner sc = null;
         String datosJson;
         try {
@@ -47,7 +47,7 @@ public class LeerJson {
     }
 
     public static void leerJsonProveedores() {
-        File j = new File("C:\\Users\\angel\\Documents\\Programacion\\proyecto\\src\\main\\java\\com\\proyecto\\app\\ficheros\\proovedores.json");
+        File j = new File("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\ficheros\\proveedores.json");
         Scanner sc=null;
         String datosJson;
         try {
