@@ -16,7 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * @author Angel,David
+ * @author Angel,Aira
  * @version 0.1.1
  * Main de Api Rest (Tomcat embebido en puerto 8080)
  */
@@ -27,8 +27,8 @@ public class ProyectoProgramacionApplication {
     }
 
     public static void main(String[] args) {
-        Portal portal = new Portal();
-        portal.iniciar();
+        //Portal portal = new Portal();
+        //portal.iniciar();
         SpringApplication.run(ProyectoProgramacionApplication.class, args);
 
     }
@@ -37,7 +37,10 @@ public class ProyectoProgramacionApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://samaria-bucket.s3-website-eu-west-1.amazonaws.com:4200")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
             }
         };
     }

@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Creado por @autor: angel,David
+ * Creado por @autor: angel,Aira
  * El  16 de mar. de 2021.
  * Clase controlador de la entidad proveedores
  */
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/api/proveedores")
 public class ProveedoresController {
     /**
@@ -44,7 +44,7 @@ public class ProveedoresController {
     @PostMapping
     public ResponseEntity<?> crearProveedor(@RequestBody Proveedores proveedor) {
         proveedorFichero=proveedoresService.save(proveedor);
-        EscribirJson.escribirProveedoresJson("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\ficheros\\proveedores",proveedorFichero);
+        EscribirJson.escribirProveedoresJson("./",proveedorFichero);
         LeerJson.leerJsonProveedores();
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoresService.save(proveedor));
     }

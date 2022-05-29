@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Creado por @autor: angel, David
+ * Creado por @autor: angel, Aira
  * El  16 de mar. de 2021.
  *
  * @version 0.0.3
@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
  */
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/api/productos")
 public class ProductosController {
     /**
@@ -46,7 +46,7 @@ public class ProductosController {
     @PostMapping
     public ResponseEntity<?> crearProducto(@RequestBody Productos producto) {
         productoFichero = productosService.save(producto);
-        EscribirJson.escribirProductosJson("C:\\Users\\angel\\Documents\\Programacion\\proyectoProgramacion\\src\\main\\java\\com\\proyecto\\app\\ficheros\\productos", productoFichero);
+        EscribirJson.escribirProductosJson("./", productoFichero);
         LeerJson.leerJsonProductos();
         return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(producto));
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Creado por @autor: angel, David
+ * Creado por @autor: angel, Aira
  * El  14 de mar. de 2021.
  *
  * @version 0.1.1
