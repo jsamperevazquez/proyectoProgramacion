@@ -56,7 +56,7 @@ public class ClientesController {
         // Método recibe en el cuerpo de la petición un cliente
         entity = ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
         clienteFichero = clienteService.save(cliente);
-        EscribirJson.escribirClientesJson("./", clienteFichero);
+        EscribirJson.escribirClientesJson("/json/clientes", clienteFichero);
         LeerJson.leerJsonClientes();
         return entity; //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }

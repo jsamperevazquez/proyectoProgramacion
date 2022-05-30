@@ -46,7 +46,7 @@ public class ProductosController {
     @PostMapping
     public ResponseEntity<?> crearProducto(@RequestBody Productos producto) {
         productoFichero = productosService.save(producto);
-        EscribirJson.escribirProductosJson("./", productoFichero);
+        EscribirJson.escribirProductosJson("/json/productos", productoFichero);
         LeerJson.leerJsonProductos();
         return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(producto));
 
