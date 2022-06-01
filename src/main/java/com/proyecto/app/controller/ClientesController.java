@@ -23,9 +23,9 @@ import java.util.stream.StreamSupport;
 
 
 @RestController
+@CrossOrigin (origins = "*:4200" , methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.PUT})
 // Combinación entre Controller y ResponseBody (Controller para controlador; ResponseBody indicamos que el valor de retorno de nuestros métodos tiene que ser cuerpo solicitud (JSON))
 @RequestMapping("/api/clientes") //para acceder a nuestros recursos de usuario a través de la url con navegador
-@CrossOrigin
 public class ClientesController {
 
     //El controlador se va a comunicar con los métodos creados en la interface del service a través de inyección de dependencias
@@ -49,14 +49,14 @@ public class ClientesController {
      * @param cliente Recibe un cliente
      * @return Respuesta de HTTPstatus con el estado
      */
-    @CrossOrigin // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
+    @CrossOrigin  // Permitir peticiones desde la dirección que le pasemos (Para frontEnd)
     @PostMapping  // Recurso Post para crear del api REST
     public ResponseEntity<?> crearCliente(@RequestBody Clientes cliente) { // Con la @RequestBody le decimos que recibimos en el cuerpo un cliente
         ResponseEntity entity;
         // Método recibe en el cuerpo de la petición un cliente
         entity = ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
         clienteFichero = clienteService.save(cliente);
-        EscribirJson.escribirClientesJson("/json/clientes", clienteFichero);
+        EscribirJson.escribirClientesJson("/home/ec2-user/json/clientes", clienteFichero);
         LeerJson.leerJsonClientes();
         return entity; //guardamos el cliente y lo devolvemos(save) y devolvemos un código 201 (creado ok con httpStatus)
     }

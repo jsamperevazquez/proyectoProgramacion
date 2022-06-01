@@ -11,7 +11,7 @@ import java.util.Scanner;
  **/
 public class LeerJson {
     public static void leerJsonClientes() {
-        File j = new File("./clientes.json");
+        File j = new File("/home/ec2-user/json/clientes.json");
         Scanner sc = null;
         String datosJson;
         try {
@@ -29,7 +29,7 @@ public class LeerJson {
     }
 
     public static void leerJsonProductos() {
-        File j = new File("./productos.json");
+        File j = new File("/home/ec2-user/json/productos.json");
         Scanner sc = null;
         String datosJson;
         try {
@@ -47,7 +47,7 @@ public class LeerJson {
     }
 
     public static void leerJsonProveedores() {
-        File j = new File("./proveedores.json");
+        File j = new File("/home/ec2-user/json/proveedores.json");
         Scanner sc=null;
         String datosJson;
         try {

@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
  */
 
 @RestController
-@CrossOrigin
+@CrossOrigin (origins = "*:4200" , methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.PUT})
 @RequestMapping("/api/productos")
 public class ProductosController {
     /**
@@ -46,7 +46,7 @@ public class ProductosController {
     @PostMapping
     public ResponseEntity<?> crearProducto(@RequestBody Productos producto) {
         productoFichero = productosService.save(producto);
-        EscribirJson.escribirProductosJson("/json/productos", productoFichero);
+        EscribirJson.escribirProductosJson("/home/ec2-user/json/productos", productoFichero);
         LeerJson.leerJsonProductos();
         return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(producto));
 
