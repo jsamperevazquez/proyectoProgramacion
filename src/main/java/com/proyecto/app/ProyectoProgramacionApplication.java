@@ -31,18 +31,6 @@ public class ProyectoProgramacionApplication {
         SpringApplication.run(ProyectoProgramacionApplication.class, args);
 
     }
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://samaria-bucket.s3-website-eu-west-1.amazonaws.com:4200")
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
-            }
-        };
-    }
     @EnableWebSecurity
     public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -54,7 +42,7 @@ public class ProyectoProgramacionApplication {
         @Bean
         CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(Arrays.asList("*"));
+            configuration.setAllowedOriginPatterns(Arrays.asList("*"));
             configuration.setAllowedMethods(Arrays.asList("*"));
             configuration.setAllowedHeaders(Arrays.asList("*"));
             configuration.setAllowCredentials(true);

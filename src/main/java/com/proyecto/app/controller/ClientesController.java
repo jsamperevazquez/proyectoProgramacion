@@ -23,7 +23,7 @@ import java.util.stream.StreamSupport;
 
 
 @RestController
-@CrossOrigin (origins = "*:4200" , methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.PUT})
+@CrossOrigin (originPatterns = "*" , methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.PUT})
 // Combinación entre Controller y ResponseBody (Controller para controlador; ResponseBody indicamos que el valor de retorno de nuestros métodos tiene que ser cuerpo solicitud (JSON))
 @RequestMapping("/api/clientes") //para acceder a nuestros recursos de usuario a través de la url con navegador
 public class ClientesController {
